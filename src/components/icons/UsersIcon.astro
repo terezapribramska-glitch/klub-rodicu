@@ -2,12 +2,13 @@
   xmlns="http://www.w3.org/2000/svg"
   viewBox="0 0 24 24"
   fill="none"
-  stroke="currentColor"
+  stroke="url(#logo-gradient)"
   stroke-width="1.8"
   stroke-linecap="round"
   stroke-linejoin="round"
   class="icon"
 >
+  <defs><linearGradient id="logo-gradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse"><stop stop-color="#f4c63a"/><stop offset="1" stop-color="#4d7386"/></linearGradient></defs>
   <path d="M16 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/>
   <circle cx="9.5" cy="7" r="3"/>
   <path d="M20 21v-2a4 4 0 0 0-3-3.87"/>
@@ -18,7 +19,6 @@
 .icon{
   width:22px;
   height:22px;
-  color:var(--color-secondary);
   flex-shrink:0;
 }
 </style>
