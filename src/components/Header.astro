@@ -12,16 +12,18 @@
       <a href="/kontakty">Kontakty</a>
     </nav>
 
-    <details class="mobile-navigation">
-      <summary aria-label="Otevřít navigaci"><span class="menu-icon" aria-hidden="true"></span></summary>
-      <nav>
+    <div class="mobile-navigation">
+      <button class="menu-toggle" type="button" aria-label="Otevřít navigaci" aria-expanded="false" aria-controls="mobile-menu">
+        <span class="menu-icon" aria-hidden="true"></span>
+      </button>
+      <nav id="mobile-menu">
         <a href="/novinky">Novinky</a>
         <a href="/dokumenty">Dokumenty</a>
         <a href="/o-klubu">O klubu</a>
         <a href="/platby">Platby</a>
         <a href="/kontakty">Kontakty</a>
       </nav>
-    </details>
+    </div>
   </div>
 </header>
 
@@ -62,7 +64,7 @@
   display: none;
 }
 
-.mobile-navigation summary {
+.menu-toggle {
   display: none;
 }
 
@@ -102,7 +104,7 @@ nav a:hover {
     display: block;
   }
 
-  .mobile-navigation summary {
+  .menu-toggle {
     display: inline-flex;
     width: 44px;
     height: 44px;
@@ -115,15 +117,8 @@ nav a:hover {
     font-weight: 400;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    list-style: none;
-  }
-
-  .mobile-navigation summary::marker {
-    content: "";
-  }
-
-  .mobile-navigation summary::-webkit-details-marker {
-    display: none;
+    border: 0;
+    background: transparent;
   }
 
   .menu-icon,
@@ -150,9 +145,9 @@ nav a:hover {
   .menu-icon::before { top: -7px; }
   .menu-icon::after { top: 7px; }
 
-  .mobile-navigation[open] .menu-icon { background: transparent; }
-  .mobile-navigation[open] .menu-icon::before { top: 0; transform: rotate(45deg); }
-  .mobile-navigation[open] .menu-icon::after { top: 0; transform: rotate(-45deg); }
+  .mobile-navigation.is-open .menu-icon { background: transparent; }
+  .mobile-navigation.is-open .menu-icon::before { top: 0; transform: rotate(45deg); }
+  .mobile-navigation.is-open .menu-icon::after { top: 0; transform: rotate(-45deg); }
 
   .mobile-navigation nav {
     display: none;
@@ -170,10 +165,31 @@ nav a:hover {
     box-shadow: var(--shadow-card);
   }
 
-  .mobile-navigation[open] nav { display: flex; }
+  .mobile-navigation.is-open nav { display: flex; }
 
   .mobile-navigation nav a {
     padding: 0.9rem 1rem;
   }
 }
 </style>
+
+<script>
+  document.querySelectorAll('.mobile-navigation').forEach((menu) => {
+    const toggle = menu.querySelector<HTMLButtonElement>('.menu-toggle');
+    const links = menu.querySelectorAll('a');
+
+    if (!toggle) return;
+
+    toggle.addEventListener('click', () => {
+      const isOpen = menu.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', String(isOpen));
+      toggle.setAttribute('aria-label', isOpen ? 'Zavřít navigaci' : 'Otevřít navigaci');
+    });
+
+    links.forEach((link) => link.addEventListener('click', () => {
+      menu.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Otevřít navigaci');
+    }));
+  });
+</script>
