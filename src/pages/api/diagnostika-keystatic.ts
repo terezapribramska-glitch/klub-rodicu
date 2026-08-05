@@ -1,5 +1,10 @@
 export const prerender = false;
 
+declare const __KEYSTATIC_ENV_STATUS__: Record<
+  string,
+  { existuje: boolean; nastavena: boolean; delka: number }
+>;
+
 const check = (value: string | undefined) => ({
   nastavena: Boolean(value),
   delka: value?.length ?? 0,
@@ -14,5 +19,6 @@ export function GET() {
       keystaticSecret: check(import.meta.env.KEYSTATIC_SECRET),
       githubAppSlug: check(import.meta.env.PUBLIC_KEYSTATIC_GITHUB_APP_SLUG),
     },
+    stavPriSestaveni: __KEYSTATIC_ENV_STATUS__,
   });
 }

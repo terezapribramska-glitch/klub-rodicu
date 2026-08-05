@@ -22,10 +22,24 @@ const keystaticDefinitions = Object.fromEntries(
   ]),
 );
 
+const keystaticStatus = Object.fromEntries(
+  keystaticEnv.map((name) => [
+    name,
+    {
+      existuje: Object.prototype.hasOwnProperty.call(env, name),
+      nastavena: Boolean(env[name]),
+      delka: env[name]?.length ?? 0,
+    },
+  ]),
+);
+
 export default defineConfig({
   adapter: vercel(),
   vite: {
-    define: keystaticDefinitions,
+    define: {
+      ...keystaticDefinitions,
+      __KEYSTATIC_ENV_STATUS__: JSON.stringify(keystaticStatus),
+    },
   },
   integrations: [
     react(),
