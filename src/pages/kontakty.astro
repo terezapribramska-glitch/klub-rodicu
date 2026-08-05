@@ -27,8 +27,8 @@ const ucet = nastaveni?.platby?.accountNumber;
         {obecne?.address && <div class="overview-section"><h3>Sídlo spolku</h3><p class="address">{obecne.address}</p></div>}
         {ucet && <div class="overview-section"><h3>Bankovní spojení</h3><p><strong>{ucet}</strong></p><p>Informace k platbám najdete také na stránce <a href="/platby">Platby</a>.</p></div>}
       </section>}
-      {vedeni.length > 0 && <section class="people"><h2>Výbor Klubu rodičů</h2><div class="table-scroll"><table class="people-table"><thead><tr><th>Jméno</th><th>Pozice</th><th>E-mail</th></tr></thead><tbody>{vedeni.map((osoba) => <tr><td><h3>{osoba.name}</h3></td><td>{osoba.role}</td><td>{osoba.email && <a href={`mailto:${osoba.email}`}>{osoba.email}</a>}</td></tr>)}</tbody></table></div></section>}
-      {zastupciSkoly.length > 0 && <section class="people"><h2>Zástupci školy</h2><div class="table-scroll"><table class="people-table"><thead><tr><th>Jméno</th><th>Pozice</th><th>E-mail</th></tr></thead><tbody>{zastupciSkoly.map((osoba) => <tr><td><h3>{osoba.name}</h3></td><td>{osoba.role}</td><td>{osoba.email && <a href={`mailto:${osoba.email}`}>{osoba.email}</a>}</td></tr>)}</tbody></table></div></section>}
+      {vedeni.length > 0 && <section class="people"><h2>Výbor Klubu rodičů</h2><div class="table-scroll"><table class="people-table"><thead><tr><th>Jméno</th><th>Pozice</th><th>E-mail</th></tr></thead><tbody>{vedeni.map((osoba) => <tr><td data-label="Jméno"><h3>{osoba.name}</h3></td><td data-label="Pozice">{osoba.role}</td><td data-label="E-mail">{osoba.email && <a href={`mailto:${osoba.email}`}>{osoba.email}</a>}</td></tr>)}</tbody></table></div></section>}
+      {zastupciSkoly.length > 0 && <section class="people"><h2>Zástupci školy</h2><div class="table-scroll"><table class="people-table"><thead><tr><th>Jméno</th><th>Pozice</th><th>E-mail</th></tr></thead><tbody>{zastupciSkoly.map((osoba) => <tr><td data-label="Jméno"><h3>{osoba.name}</h3></td><td data-label="Pozice">{osoba.role}</td><td data-label="E-mail">{osoba.email && <a href={`mailto:${osoba.email}`}>{osoba.email}</a>}</td></tr>)}</tbody></table></div></section>}
       {tridniVybory.length > 0 && <section class="people"><h2>Třídní výbory</h2><div class="contact-grid">{tridniVybory.map((trida) => <article class="card"><h3>{trida.className}</h3>{trida.chairName && <p>Předseda/předsedkyně: {trida.chairName}</p>}{trida.treasurerName && <p>Pokladník/pokladnice: {trida.treasurerName}</p>}</article>)}</div></section>}
     </section>
   </main>
@@ -53,5 +53,16 @@ const ucet = nastaveni?.platby?.accountNumber;
 .people-table tr:last-child td { border-bottom: 0; }
 .people-table h3 { margin: 0; }
 .people-table td:nth-child(2) { color: var(--color-text-light); }
-@media (max-width: 800px) { .contact-grid { grid-template-columns: 1fr; } }
+@media (max-width: 800px) {
+  .contact-grid { grid-template-columns: 1fr; }
+  .table-scroll { overflow: visible; }
+  .people-table, .people-table tbody, .people-table tr, .people-table td { display: block; width: 100%; min-width: 0; }
+  .people-table thead { display: none; }
+  .people-table tr { padding: 1.5rem; border-bottom: 1px solid var(--color-border); }
+  .people-table tr:last-child { border-bottom: 0; }
+  .people-table td { display: grid; grid-template-columns: 7rem minmax(0, 1fr); gap: .75rem; padding: .35rem 0; border: 0; }
+  .people-table td::before { content: attr(data-label); color: var(--color-secondary); font-size: .8rem; font-weight: 400; letter-spacing: .08em; text-transform: uppercase; }
+  .people-table td:first-child { display: block; padding: 0 0 .75rem; }
+  .people-table td:first-child::before { display: none; }
+}
 </style>
