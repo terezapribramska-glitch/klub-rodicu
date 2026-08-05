@@ -23,7 +23,7 @@ const ucet = nastaveni?.platby?.accountNumber;
     </PageHeader>
     <section class="contacts">
       {(obecne || ucet) && <section class="overview-card card">
-        {obecne && <div class="overview-section"><h3>Kontakt na výbor</h3><p>Pro obecné dotazy a komunikaci s výborem.</p>{obecne.email && <a href={`mailto:${obecne.email}`}>{obecne.email}</a>}</div>}
+        {obecne && <div class="overview-section"><h3>Kontakt na výbor</h3><p>Pro obecné dotazy a&nbsp;komunikaci s výborem.</p>{obecne.email && <a href={`mailto:${obecne.email}`}>{obecne.email}</a>}</div>}
         {obecne?.address && <div class="overview-section"><h3>Sídlo spolku</h3><p class="address">{obecne.address}</p></div>}
         {ucet && <div class="overview-section"><h3>Bankovní spojení</h3><p><strong>{ucet}</strong></p><p>Informace k platbám najdete také na stránce <a href="/platby">Platby</a>.</p></div>}
       </section>}

@@ -18,11 +18,11 @@ const formatDate = new Intl.DateTimeFormat('cs-CZ', { dateStyle: 'long' });
 <Layout>
   <Header />
   <main>
-    <PageHeader eyebrow="Knihovna dokumentů" title="Dokumenty" lead="Zde najdete stanovy spolku, výroční zprávy, zápisy z jednání i další dokumenty ke stažení."><DocumentIcon slot="icon" /></PageHeader>
+    <PageHeader eyebrow="Knihovna dokumentů" title="Dokumenty" lead="Zde najdete stanovy spolku, výroční zprávy, zápisy z jednání i&nbsp;další dokumenty ke stažení."><DocumentIcon slot="icon" /></PageHeader>
     <section class="documents">
       {stanovy.length > 0 && <section class="document-group"><h2>Stanovy</h2><p>Aktuálně platné stanovy Klubu rodičů.</p><ul class="document-list">{stanovy.map(({ data }) => <li><a href={data.file} target="_blank" rel="noopener noreferrer"><DocumentIcon />{data.title}</a></li>)}</ul></section>}
-      {zapisy.length > 0 && <section class="document-group"><h2>Zápisy z jednání</h2><p>Zápisy z jednání výboru a členských schůzí Klubu rodičů.</p><ul class="document-list">{zapisy.map(({ data }) => <li><a href={data.file} target="_blank" rel="noopener noreferrer"><DocumentIcon />{data.title} – {formatDate.format(data.meetingDate)}</a></li>)}</ul></section>}
-      {vyrocniZpravy.length > 0 && <section class="document-group"><h2>Výroční zprávy</h2><p>Přehled výročních zpráv o činnosti a hospodaření Klubu rodičů.</p><ul class="document-list">{vyrocniZpravy.map(({ data }) => <li><a href={data.file} target="_blank" rel="noopener noreferrer"><DocumentIcon />{data.title}</a></li>)}</ul></section>}
+      {zapisy.length > 0 && <section class="document-group"><h2>Zápisy z jednání</h2><p>Zápisy z jednání výboru a&nbsp;členských schůzí Klubu rodičů.</p><ul class="document-list">{zapisy.map(({ data }) => <li><a href={data.file} target="_blank" rel="noopener noreferrer"><DocumentIcon />{data.title} – {formatDate.format(data.meetingDate)}</a></li>)}</ul></section>}
+      {vyrocniZpravy.length > 0 && <section class="document-group"><h2>Výroční zprávy</h2><p>Přehled výročních zpráv o&nbsp;činnosti a&nbsp;hospodaření Klubu rodičů.</p><ul class="document-list">{vyrocniZpravy.map(({ data }) => <li><a href={data.file} target="_blank" rel="noopener noreferrer"><DocumentIcon />{data.title}</a></li>)}</ul></section>}
       {ostatni.length > 0 && <section class="document-group"><h2>Ostatní dokumenty</h2><ul class="document-list">{ostatni.map(({ data }) => <li><a href={data.file} target="_blank" rel="noopener noreferrer"><DocumentIcon />{data.title}</a></li>)}</ul></section>}
     </section>
   </main>

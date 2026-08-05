@@ -15,7 +15,7 @@ const novinky = (await getCollection('novinky'))
 <Layout>
   <Header />
   <main>
-    <PageHeader eyebrow="Co je nového" title="Novinky" lead="Aktuální informace z Klubu rodičů a školy."><NewsIcon slot="icon" /></PageHeader>
+    <PageHeader eyebrow="Co je nového" title="Novinky" lead="Aktuální informace z Klubu rodičů a&nbsp;školy."><NewsIcon slot="icon" /></PageHeader>
     <section class="news-list">
       {novinky.length ? novinky.map((novinka) => <article class="news-card">
         {novinka.data.coverImage && <img src={novinka.data.coverImage} alt={novinka.data.coverImageAlt || ''} />}

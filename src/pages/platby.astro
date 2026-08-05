@@ -18,14 +18,14 @@ const cerpani = (await getCollection('cerpani'))
 <Layout>
   <Header />
   <main>
-    <PageHeader eyebrow="Placení a čerpání" title="Platby" lead="Všechny informace o členských příspěvcích, způsobu platby a využití prostředků Klubu rodičů."><CreditCardIcon slot="icon" /></PageHeader>
+    <PageHeader eyebrow="Placení a čerpání" title="Platby" lead="Všechny informace o členských příspěvcích, způsobu platby a&nbsp;využití prostředků Klubu rodičů."><CreditCardIcon slot="icon" /></PageHeader>
     <section class="payments">
       {platby ? <>
-        <section class="payment-card"><h2>Členský příspěvek</h2><p class="price">{platby.membershipFee.toLocaleString('cs-CZ')} {platby.currency === 'CZK' ? 'Kč' : platby.currency}</p><p class="price-note">za každého žáka a školní rok</p></section>
+        <section class="payment-card"><h2>Členský příspěvek</h2><p class="price">{platby.membershipFee.toLocaleString('cs-CZ')} {platby.currency === 'CZK' ? 'Kč' : platby.currency}</p><p class="price-note">za každého žáka a&nbsp;školní rok</p></section>
         <section class="payment-details"><div class="payment-info card"><h2>Jak zaplatit</h2><dl><dt>Číslo účtu</dt><dd>{platby.accountNumber}</dd>{platby.variableSymbol && <><dt>Variabilní symbol</dt><dd>{platby.variableSymbol}</dd></>}{platby.paymentNote && <><dt>Poznámka pro příjemce</dt><dd>{platby.paymentNote}</dd></>}</dl></div>
         <div class="payment-qr card">{platby.qrCode ? <img src={platby.qrCode} alt="QR kód pro platbu" /> : <p>QR kód doplníme.</p>}</div></section>
       </> : <section class="notice"><h2>Informace k platbě připravujeme</h2><p>Platební údaje budou zveřejněny brzy.</p></section>}
-      {cerpani.length > 0 && <section class="document-group"><h2>Přehled čerpání příspěvků</h2><p>Přehled hospodaření Klubu rodičů a využití členských příspěvků.</p><ul>{cerpani.map(({ data }) => <li><a href={data.file} target="_blank" rel="noopener noreferrer"><DocumentIcon />Přehled čerpání příspěvků {data.year}</a></li>)}</ul></section>}
+      {cerpani.length > 0 && <section class="document-group"><h2>Přehled čerpání příspěvků</h2><p>Přehled hospodaření Klubu rodičů a&nbsp;využití členských příspěvků.</p><ul>{cerpani.map(({ data }) => <li><a href={data.file} target="_blank" rel="noopener noreferrer"><DocumentIcon />Přehled čerpání příspěvků {data.year}</a></li>)}</ul></section>}
     </section>
   </main>
   <Footer />
