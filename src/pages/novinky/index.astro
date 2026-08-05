@@ -1,0 +1,39 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import NewsIcon from '../../components/icons/NewsIcon.astro';
+
+const formatDate = new Intl.DateTimeFormat('cs-CZ', { dateStyle: 'long' });
+const novinky = (await getCollection('novinky'))
+  .filter(({ data }) => data.publikace.publikovano)
+  .sort((a, b) => Number(b.data.featured) - Number(a.data.featured) || b.data.publishedAt.getTime() - a.data.publishedAt.getTime());
+---
+
+<Layout>
+  <Header />
+  <main>
+    <PageHeader eyebrow="Co je nového" title="Novinky" lead="Aktuální informace z Klubu rodičů a školy."><NewsIcon slot="icon" /></PageHeader>
+    <section class="news-list">
+      {novinky.length ? novinky.map((novinka) => <article class="news-card">
+        {novinka.data.coverImage && <img src={novinka.data.coverImage} alt={novinka.data.coverImageAlt || ''} />}
+        <div><time datetime={novinka.data.publishedAt.toISOString()}>{formatDate.format(novinka.data.publishedAt)}</time><h2><a href={`/novinky/${novinka.id}`}>{novinka.data.title}</a></h2><p>{novinka.data.summary}</p><a class="more" href={`/novinky/${novinka.id}`}>Přečíst novinku →</a></div>
+      </article>) : <p>Novinky připravujeme.</p>}
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+.news-list { max-width: 900px; margin: 0 auto; padding-bottom: 5rem; }
+.news-card { display: grid; grid-template-columns: 240px 1fr; gap: 2rem; padding: 2rem 0; border-bottom: 1px solid var(--color-border); }
+.news-card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-md); }
+.news-card time { color: var(--color-text-light); font-size: .9rem; }
+.news-card h2 { margin: .5rem 0 .75rem; }
+.news-card h2 a { color: inherit; text-decoration: none; }
+.news-card p { margin-bottom: 1rem; }
+.more { color: var(--color-secondary); }
+@media (max-width: 700px) { .news-card { grid-template-columns: 1fr; } .news-card img { max-width: 360px; } }
+</style>

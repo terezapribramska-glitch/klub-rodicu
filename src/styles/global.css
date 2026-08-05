@@ -1,0 +1,151 @@
+:root {
+  /* ===== Brand ===== */
+
+  --color-primary: #2c424d;
+  --color-secondary: #567588;
+
+  --color-yellow: #ecc315;
+  --color-blue-light: #a5d5df;
+  --color-grey-blue: #a8b7bc;
+
+  /* ===== Neutrals ===== */
+
+  --color-background: #fcfcfb;
+  --color-surface: #ffffff;
+
+  --color-text: #2c424d;
+  --color-text-light: #567588;
+
+  --color-border: #e7ecef;
+
+  /* ===== Layout ===== */
+
+  --container-width: 1120px;
+
+  /* ===== Radius ===== */
+
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 28px;
+
+  /* ===== Shadows ===== */
+
+  --shadow-card: 0 8px 30px rgba(44, 66, 77, 0.08);
+
+  /* ===== Spacing ===== */
+
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+
+  /* ===== Animation ===== */
+
+  --transition: 0.25s ease;
+}
+
+/* ===== Typography ===== */
+
+h1,
+h2,
+h3 {
+  font-family: "Libre Baskerville", serif;
+  font-weight: 400;
+  color: var(--color-primary);
+  margin-top: 0;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+h4,
+h5,
+h6 {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  color: var(--color-primary);
+  margin-top: 0;
+  line-height: 1.35;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5vw, 3.75rem);
+  margin-bottom: var(--space-md);
+}
+
+h2 {
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  margin-bottom: var(--space-md);
+}
+
+h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Eyebrow */
+
+.eyebrow {
+  margin-bottom: 0.75rem;
+  color: var(--color-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.85rem;
+}
+
+/* Body */
+
+body {
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+  font-weight:200;
+  font-size: 1rem;
+  line-height: 1.7;
+  background: var(--color-background);
+  color: var(--color-text);
+}
+
+p {
+  margin: 0 0 var(--space-sm);
+}
+
+a {
+  color: var(--color-secondary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-background);
+  color: var(--color-text);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  transition: var(--transition);
+}
+
+main {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: var(--space-lg) var(--space-sm);
+}

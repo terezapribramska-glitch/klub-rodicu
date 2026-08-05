@@ -1,0 +1,75 @@
+<section class="hero">
+  <div class="hero-content">
+    <p class="eyebrow">Klub rodičů při ZŠ Kavčí hory</p>
+
+    <h1>Společně podporujeme školu i naše děti.</h1>
+
+    <p class="lead">
+      Klub rodičů propojuje rodiče, školu i děti. Přináší aktuální informace,
+      podporuje školní akce a pomáhá vytvářet prostředí, kde se dětem dobře učí
+      i vyrůstá.
+    </p>
+  </div>
+
+  <div class="hero-image">
+    <img
+      src="/images/skola-k-sidlisti.png"
+      alt="Budova ZŠ Kavčí hory"
+    />
+  </div>
+</section>
+
+<style>
+.hero {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  padding: 5rem 0 6rem;
+
+}
+
+.hero-content {
+  max-width: 42rem;
+}
+
+.eyebrow {
+  margin-bottom: 0.75rem;
+  color: var(--color-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.85rem;
+}
+
+.hero h1 {
+  max-width: 18ch;
+  margin-bottom: 1.75rem;
+}
+
+.lead {
+  max-width: 34rem;
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: var(--color-text-light);
+}
+
+.hero-image img {
+  width: 100%;
+  display: block;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+ transform: rotate(2deg);
+}
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding: 3rem 0 4rem;
+  }
+
+  .hero h1 {
+    max-width: none;
+  }
+}
+</style>

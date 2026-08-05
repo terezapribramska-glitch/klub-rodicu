@@ -1,0 +1,42 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageHeader from '../components/PageHeader.astro';
+import DocumentIcon from '../components/icons/DocumentIcon.astro';
+
+const razeni = (a, b) => a.data.publikace.poradi - b.data.publikace.poradi || b.data.year - a.data.year;
+const dokumenty = (await getCollection('dokumenty')).filter(({ data }) => data.publikace.publikovano).sort(razeni);
+const zapisy = (await getCollection('zapisy')).filter(({ data }) => data.publikace.publikovano).sort((a, b) => b.data.meetingDate.getTime() - a.data.meetingDate.getTime());
+const stanovy = dokumenty.filter(({ data }) => data.category === 'stanovy');
+const vyrocniZpravy = dokumenty.filter(({ data }) => data.category === 'vyrocni-zpravy');
+const ostatni = dokumenty.filter(({ data }) => data.category === 'ostatni');
+const formatDate = new Intl.DateTimeFormat('cs-CZ', { dateStyle: 'long' });
+---
+
+<Layout>
+  <Header />
+  <main>
+    <PageHeader eyebrow="Knihovna dokumentů" title="Dokumenty" lead="Zde najdete stanovy spolku, výroční zprávy, zápisy z jednání i další dokumenty ke stažení."><DocumentIcon slot="icon" /></PageHeader>
+    <section class="documents">
+      {stanovy.length > 0 && <section class="document-group"><h2>Stanovy</h2><p>Aktuálně platné stanovy Klubu rodičů.</p><ul class="document-list">{stanovy.map(({ data }) => <li><a href={data.file} target="_blank" rel="noopener noreferrer"><DocumentIcon />{data.title}</a></li>)}</ul></section>}
+      {zapisy.length > 0 && <section class="document-group"><h2>Zápisy z jednání</h2><p>Zápisy z jednání výboru a členských schůzí Klubu rodičů.</p><ul class="document-list">{zapisy.map(({ data }) => <li><a href={data.file} target="_blank" rel="noopener noreferrer"><DocumentIcon />{data.title} – {formatDate.format(data.meetingDate)}</a></li>)}</ul></section>}
+      {vyrocniZpravy.length > 0 && <section class="document-group"><h2>Výroční zprávy</h2><p>Přehled výročních zpráv o činnosti a hospodaření Klubu rodičů.</p><ul class="document-list">{vyrocniZpravy.map(({ data }) => <li><a href={data.file} target="_blank" rel="noopener noreferrer"><DocumentIcon />{data.title}</a></li>)}</ul></section>}
+      {ostatni.length > 0 && <section class="document-group"><h2>Ostatní dokumenty</h2><ul class="document-list">{ostatni.map(({ data }) => <li><a href={data.file} target="_blank" rel="noopener noreferrer"><DocumentIcon />{data.title}</a></li>)}</ul></section>}
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+.documents { max-width: 850px; margin: 0 auto; padding-bottom: 5rem; }
+.document-group { padding: 2.5rem 0; border-bottom: 1px solid var(--color-border); }
+.document-group:last-child { border-bottom: 0; }
+.document-group h2 { margin-bottom: .75rem; }
+.document-group p { max-width: 48rem; margin-bottom: 1.5rem; }
+.document-list { list-style: none; margin: 0; padding: 0; }
+.document-list li + li { margin-top: 1rem; }
+.document-list a { display: flex; align-items: center; gap: .75rem; padding: 1rem 1.25rem; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); box-shadow: var(--shadow-card); color: var(--color-secondary); text-decoration: none; transition: var(--transition); }
+.document-list a:hover { transform: translateY(-2px); border-color: var(--color-secondary); color: var(--color-primary); }
+</style>

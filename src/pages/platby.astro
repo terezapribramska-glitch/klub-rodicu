@@ -1,0 +1,55 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageHeader from '../components/PageHeader.astro';
+import CreditCardIcon from '../components/icons/CreditCardIcon.astro';
+import DocumentIcon from '../components/icons/DocumentIcon.astro';
+import { keystaticReader } from '../lib/keystatic';
+
+const nastaveni = await keystaticReader.singletons.nastaveniWebu.read();
+const platby = nastaveni?.platby;
+const cerpani = (await getCollection('cerpani'))
+  .filter(({ data }) => data.publikace.publikovano)
+  .sort((a, b) => Number(b.data.year) - Number(a.data.year));
+---
+
+<Layout>
+  <Header />
+  <main>
+    <PageHeader eyebrow="Placení a čerpání" title="Platby" lead="Všechny informace o členských příspěvcích, způsobu platby a využití prostředků Klubu rodičů."><CreditCardIcon slot="icon" /></PageHeader>
+    <section class="payments">
+      {platby ? <>
+        <section class="payment-card"><h2>Členský příspěvek</h2><p class="price">{platby.membershipFee.toLocaleString('cs-CZ')} {platby.currency === 'CZK' ? 'Kč' : platby.currency}</p><p class="price-note">za každého žáka a školní rok</p></section>
+        <section class="payment-details"><div class="payment-info card"><h2>Jak zaplatit</h2><dl><dt>Číslo účtu</dt><dd>{platby.accountNumber}</dd>{platby.variableSymbol && <><dt>Variabilní symbol</dt><dd>{platby.variableSymbol}</dd></>}{platby.paymentNote && <><dt>Poznámka pro příjemce</dt><dd>{platby.paymentNote}</dd></>}</dl></div>
+        <div class="payment-qr card">{platby.qrCode ? <img src={platby.qrCode} alt="QR kód pro platbu" /> : <p>QR kód doplníme.</p>}</div></section>
+      </> : <section class="notice"><h2>Informace k platbě připravujeme</h2><p>Platební údaje budou zveřejněny brzy.</p></section>}
+      {cerpani.length > 0 && <section class="document-group"><h2>Přehled čerpání příspěvků</h2><p>Přehled hospodaření Klubu rodičů a využití členských příspěvků.</p><ul>{cerpani.map(({ data }) => <li><a href={data.file} target="_blank" rel="noopener noreferrer"><DocumentIcon />Přehled čerpání příspěvků {data.year}</a></li>)}</ul></section>}
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+.payments { max-width: 900px; margin: 0 auto; padding-bottom: 5rem; }
+.payment-card, .card, .notice { padding: 2rem; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); }
+.payment-card { margin-bottom: 4rem; padding: 2.5rem; text-align: center; }
+.price { margin: .75rem 0 .25rem; font-family: "Libre Baskerville", serif; font-size: clamp(3.5rem, 8vw, 4.5rem); color: var(--color-primary); }
+.price-note { color: var(--color-text-light); }
+.payment-details { display: grid; grid-template-columns: 1fr 260px; gap: 2rem; margin-bottom: 5rem; align-items: stretch; }
+.payment-info h2 { margin-bottom: 1.5rem; }
+.payment-info dl { margin: 0; }
+.payment-info dt { margin-top: 1.5rem; font-weight: 600; color: var(--color-primary); }
+.payment-info dt:first-child { margin-top: 0; }
+.payment-info dd { margin: .35rem 0 0; color: var(--color-text-light); white-space: pre-line; }
+.payment-qr { display: grid; place-items: center; text-align: center; }
+.payment-qr img { width: 100%; aspect-ratio: 1; object-fit: contain; }
+.document-group { padding-top: 3rem; border-top: 1px solid var(--color-border); }
+.document-group h2 { margin-bottom: .75rem; }
+.document-group p { margin-bottom: 1.5rem; }
+.document-group ul { list-style: none; margin: 0; padding: 0; }
+.document-group li + li { margin-top: 1rem; }
+.document-group a { display: flex; align-items: center; gap: .75rem; padding: 1rem 1.25rem; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); box-shadow: var(--shadow-card); color: var(--color-secondary); text-decoration: none; }
+@media (max-width: 800px) { .payment-details { grid-template-columns: 1fr; } }
+</style>

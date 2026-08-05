@@ -1,0 +1,97 @@
+---
+import NewsIcon from "./icons/NewsIcon.astro";
+import DocumentIcon from "./icons/DocumentIcon.astro";
+import CreditCardIcon from "./icons/CreditCardIcon.astro";
+import UsersIcon from "./icons/UsersIcon.astro";
+import EnvelopeIcon from "./icons/EnvelopeIcon.astro";
+---
+
+<section class="quick-links">
+  <h2>Co vás zajímá</h2>
+
+  <div class="grid">
+
+    <a href="#" class="card">
+      <h3>
+  <NewsIcon />
+  Novinky
+</h3>
+      <p>Aktuální informace, pozvánky a důležitá oznámení.</p>
+    </a>
+
+   <a href="/dokumenty" class="card">
+  <h3>
+    <DocumentIcon />
+    Dokumenty
+  </h3>
+
+  <p>
+    Stanovy, zápisy z jednání a výroční zprávy.
+  </p>
+</a>
+
+    <a href="#" class="card">
+      <h3>
+  <CreditCardIcon />
+  Platby
+</h3>
+      <p>Číslo účtu, QR platba a informace o příspěvcích.</p>
+    </a>
+
+    <a href="#" class="card">
+      <h3>
+  <EnvelopeIcon />
+  Kontakty
+</h3>
+      <p>Vedení klubu, třídní výbory a spojení.</p>
+    </a>
+
+  </div>
+</section>
+
+<style>
+.quick-links {
+  padding: 4rem 0;
+}
+
+.quick-links h2 {
+  margin-bottom: 2rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.card {
+  display: block;
+  padding: 2rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: white;
+  transition: var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card);
+}
+
+.card h3 {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
+
+.icon {
+  width: 22px;
+  height: 22px;
+  color: var(--color-secondary);
+  flex-shrink: 0;
+}
+
+.card p {
+  margin: 0;
+}
+</style>

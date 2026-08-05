@@ -1,0 +1,30 @@
+obecne:
+  email: tereza.pribramska@gmail.com
+  address: K Sídlišti 840, 140 00 Praha 4
+vedeni:
+  - name: Michaela Vratišovská
+    role: Předsedkyně výboru
+    email: misa.v@seznam.cz
+  - name: Eva Kudějová – Jelínková
+    role: Členka výboru
+    email: kudejinka@gmail.com
+  - name: Lucie Kovářová
+    role: Členka výboru
+    email: kovarova@kovarovalegal.cz
+  - name: Jana Kubešová
+    role: Členka výboru
+    email: kubesovaj@email.cz
+  - name: Jiří Král
+    role: Člen výboru
+    email: kral.jir@seznam.cz
+zastupciSkoly:
+  - name: PaedDr. Jaroslava Kolářová
+    role: Zástupkyně školy
+    email: j.kolarova@ksidlisti.cz
+  - name: Mgr. Jana Vrbová
+    role: Pedagožka ZŠ
+    email: j.vrbova@ksidlisti.cz
+  - name: Ing. Lukáš Grimmer
+    role: Pedagog SŠ
+    email: l.grimmer@ksidlisti.cz
+tridniVybory: []

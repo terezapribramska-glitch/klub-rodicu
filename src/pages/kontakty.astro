@@ -1,0 +1,57 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageHeader from '../components/PageHeader.astro';
+import EnvelopeIcon from '../components/icons/EnvelopeIcon.astro';
+import { keystaticReader } from '../lib/keystatic';
+
+const kontakty = await keystaticReader.singletons.kontakty.read();
+const nastaveni = await keystaticReader.singletons.nastaveniWebu.read();
+const obecne = kontakty?.obecne;
+const vedeni = kontakty?.vedeni ?? [];
+const zastupciSkoly = kontakty?.zastupciSkoly ?? [];
+const tridniVybory = kontakty?.tridniVybory ?? [];
+const ucet = nastaveni?.platby?.accountNumber;
+---
+
+<Layout>
+  <Header />
+  <main>
+    <PageHeader eyebrow="Spojte se s námi" title="Kontakty" lead="Máte dotaz, nápad nebo se chcete zapojit do činnosti Klubu rodičů? Budeme rádi, když se nám ozvete.">
+      <EnvelopeIcon slot="icon" />
+    </PageHeader>
+    <section class="contacts">
+      {(obecne || ucet) && <section class="overview-card card">
+        {obecne && <div class="overview-section"><h3>Kontakt na výbor</h3><p>Pro obecné dotazy a komunikaci s výborem.</p>{obecne.email && <a href={`mailto:${obecne.email}`}>{obecne.email}</a>}</div>}
+        {obecne?.address && <div class="overview-section"><h3>Sídlo spolku</h3><p class="address">{obecne.address}</p></div>}
+        {ucet && <div class="overview-section"><h3>Bankovní spojení</h3><p><strong>{ucet}</strong></p><p>Informace k platbám najdete také na stránce <a href="/platby">Platby</a>.</p></div>}
+      </section>}
+      {vedeni.length > 0 && <section class="people"><h2>Výbor Klubu rodičů</h2><div class="table-scroll"><table class="people-table"><thead><tr><th>Jméno</th><th>Pozice</th><th>E-mail</th></tr></thead><tbody>{vedeni.map((osoba) => <tr><td><h3>{osoba.name}</h3></td><td>{osoba.role}</td><td>{osoba.email && <a href={`mailto:${osoba.email}`}>{osoba.email}</a>}</td></tr>)}</tbody></table></div></section>}
+      {zastupciSkoly.length > 0 && <section class="people"><h2>Zástupci školy</h2><div class="table-scroll"><table class="people-table"><thead><tr><th>Jméno</th><th>Pozice</th><th>E-mail</th></tr></thead><tbody>{zastupciSkoly.map((osoba) => <tr><td><h3>{osoba.name}</h3></td><td>{osoba.role}</td><td>{osoba.email && <a href={`mailto:${osoba.email}`}>{osoba.email}</a>}</td></tr>)}</tbody></table></div></section>}
+      {tridniVybory.length > 0 && <section class="people"><h2>Třídní výbory</h2><div class="contact-grid">{tridniVybory.map((trida) => <article class="card"><h3>{trida.className}</h3>{trida.chairName && <p>Předseda/předsedkyně: {trida.chairName}</p>}{trida.treasurerName && <p>Pokladník/pokladnice: {trida.treasurerName}</p>}</article>)}</div></section>}
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+.contacts { max-width: 900px; margin: 0 auto; padding-bottom: 5rem; }
+.contact-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-bottom: 2rem; }
+.card { padding: 2rem; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); }
+.card h2, .card h3 { margin-bottom: 1rem; }
+.card p:last-child { margin-bottom: 0; }
+.overview-card { margin-bottom: 3rem; }
+.overview-section + .overview-section { margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--color-border); }
+.address { white-space: pre-line; }
+.people { margin-top: 3rem; padding-top: 3rem; border-top: 1px solid var(--color-border); }
+.people > h2 { margin-bottom: 1.5rem; }
+.table-scroll { overflow-x: auto; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); }
+.people-table { width: 100%; min-width: 600px; border-collapse: collapse; text-align: left; }
+.people-table th, .people-table td { padding: 1rem 1.25rem; border-bottom: 1px solid var(--color-border); }
+.people-table th { color: var(--color-secondary); font-size: .85rem; font-weight: 400; letter-spacing: .08em; text-transform: uppercase; }
+.people-table tr:last-child td { border-bottom: 0; }
+.people-table h3 { margin: 0; }
+.people-table td:nth-child(2) { color: var(--color-text-light); }
+@media (max-width: 800px) { .contact-grid { grid-template-columns: 1fr; } }
+</style>

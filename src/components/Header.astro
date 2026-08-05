@@ -1,0 +1,179 @@
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="logo">
+      <img src="/images/logo.svg" alt="Klub rodičů při ZŠ Kavčí hory" />
+    </a>
+
+    <nav class="desktop-navigation">
+      <a href="/novinky">Novinky</a>
+      <a href="/dokumenty">Dokumenty</a>
+      <a href="/o-klubu">O klubu</a>
+      <a href="/platby">Platby</a>
+      <a href="/kontakty">Kontakty</a>
+    </nav>
+
+    <details class="mobile-navigation">
+      <summary aria-label="Otevřít navigaci"><span class="menu-icon" aria-hidden="true"></span></summary>
+      <nav>
+        <a href="/novinky">Novinky</a>
+        <a href="/dokumenty">Dokumenty</a>
+        <a href="/o-klubu">O klubu</a>
+        <a href="/platby">Platby</a>
+        <a href="/kontakty">Kontakty</a>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<style>
+.site-header {
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+}
+
+.logo img {
+  display: block;
+  height: 56px;
+  max-width: 380px;
+  width: auto;
+}
+
+.desktop-navigation {
+  display: flex;
+  gap: 1.75rem;
+}
+
+.mobile-navigation {
+  display: none;
+}
+
+.mobile-navigation summary {
+  display: none;
+}
+
+.desktop-navigation a {
+  padding: 0.5rem 0.25rem;
+}
+
+nav a {
+  color: var(--color-text);
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: var(--transition);
+}
+
+nav a:hover {
+  color: var(--color-secondary);
+}
+
+@media (max-width: 800px) {
+  .container {
+    padding: 0.75rem 1rem;
+  }
+
+  .logo img {
+    height: 46px;
+    max-width: min(68vw, 300px);
+  }
+
+  .desktop-navigation {
+    display: none;
+  }
+
+  .mobile-navigation {
+    display: block;
+  }
+
+  .mobile-navigation summary {
+    display: inline-flex;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    cursor: pointer;
+    color: var(--color-secondary);
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    list-style: none;
+  }
+
+  .mobile-navigation summary::marker {
+    content: "";
+  }
+
+  .mobile-navigation summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .menu-icon,
+  .menu-icon::before,
+  .menu-icon::after {
+    display: block;
+    width: 22px;
+    height: 1px;
+    background: currentColor;
+    transition: var(--transition);
+  }
+
+  .menu-icon {
+    position: relative;
+  }
+
+  .menu-icon::before,
+  .menu-icon::after {
+    content: "";
+    position: absolute;
+    left: 0;
+  }
+
+  .menu-icon::before { top: -7px; }
+  .menu-icon::after { top: 7px; }
+
+  .mobile-navigation[open] .menu-icon { background: transparent; }
+  .mobile-navigation[open] .menu-icon::before { top: 0; transform: rotate(45deg); }
+  .mobile-navigation[open] .menu-icon::after { top: 0; transform: rotate(-45deg); }
+
+  .mobile-navigation nav {
+    display: none;
+    position: absolute;
+    z-index: 10;
+    top: calc(100% + 1rem);
+    right: 0;
+    width: min(320px, calc(100vw - 2rem));
+    flex-direction: column;
+    gap: 0;
+    padding: 0.5rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+  }
+
+  .mobile-navigation[open] nav { display: flex; }
+
+  .mobile-navigation nav a {
+    padding: 0.9rem 1rem;
+  }
+}
+</style>

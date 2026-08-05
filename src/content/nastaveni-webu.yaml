@@ -1,0 +1,7 @@
+organizace:
+  associationName: 'Klub rodičů při Škole Kavčí hory '
+  schoolName: Škola Kavčí hory
+platby:
+  membershipFee: 1000
+  currency: CZK
+  accountNumber: 123456789/0001

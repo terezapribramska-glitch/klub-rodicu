@@ -1,0 +1,36 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+export async function getStaticPaths() {
+  const novinky = await getCollection('novinky', ({ data }) => data.publikace.publikovano);
+  return novinky.map((novinka) => ({ params: { id: novinka.id } }));
+}
+
+const novinka = await getEntry('novinky', Astro.params.id!);
+if (!novinka) throw new Error('Novinka nebyla nalezena.');
+const { Content } = await render(novinka);
+const formatDate = new Intl.DateTimeFormat('cs-CZ', { dateStyle: 'long' });
+---
+
+<Layout title={novinka.data.seo.title || novinka.data.title} description={novinka.data.seo.description || novinka.data.summary}>
+  <Header />
+  <main class="article">
+    <article>
+      <time datetime={novinka.data.publishedAt.toISOString()}>{formatDate.format(novinka.data.publishedAt)}</time>
+      <h1>{novinka.data.title}</h1>
+      {novinka.data.coverImage && <img class="cover" src={novinka.data.coverImage} alt={novinka.data.coverImageAlt || ''} />}
+      <Content />
+    </article>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+.article { max-width: 760px; margin: 0 auto; padding: 5rem 1rem; }
+time { color: var(--color-text-light); }
+h1 { margin: .75rem 0 2rem; }
+.cover { width: 100%; max-height: 460px; object-fit: cover; border-radius: var(--radius-lg); margin-bottom: 2rem; }
+</style>

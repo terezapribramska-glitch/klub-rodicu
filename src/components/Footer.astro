@@ -1,0 +1,21 @@
+---
+import { keystaticReader } from '../lib/keystatic';
+
+const kontakty = await keystaticReader.singletons.kontakty.read();
+const email = kontakty?.obecne?.email || 'info@klubrodicu.cz';
+---
+
+<footer class="footer">
+  <div class="footer-content">
+    <p>Máte dotaz nebo nápad? Ozvěte se nám na <a href={`mailto:${email}`}>{email}</a>.</p>
+    <div class="copyright">© {new Date().getFullYear()} Klub rodičů při ZŠ Kavčí hory</div>
+  </div>
+</footer>
+
+<style>
+.footer { margin-top: 6rem; padding: 4rem 0; border-top: 1px solid var(--color-border); }
+.footer-content { text-align: center; }
+.footer p { margin-bottom: 1.5rem; color: var(--color-text-light); }
+.footer a { display: inline-block; margin-bottom: 2.5rem; color: var(--color-secondary); }
+.copyright { font-size: 0.9rem; color: var(--color-text-light); }
+</style>
