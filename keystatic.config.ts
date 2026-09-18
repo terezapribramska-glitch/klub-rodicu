@@ -111,17 +111,19 @@ export default config({
       },
     }),
     cerpani: collection({
-      label: 'Přehled čerpání',
-      slugField: 'year',
+      label: 'Hospodaření',
+      slugField: 'title',
       path: 'src/content/cerpani-prispevku/*',
       format: { contentField: 'emptyContent' },
-      columns: ['year'],
+      columns: ['uploadedAt'],
       schema: {
-        year: fields.slug({
-          name: { label: 'Rok', description: 'Použijte čtyřmístný rok, například 2026.' },
+        title: fields.slug({ name: { label: 'Název' }, ...required }),
+        uploadedAt: fields.date({
+          label: 'Datum nahrání',
+          description: 'Datum, které se zobrazí u dokumentu na webu.',
           ...required,
         }),
-        file: fields.file({ label: 'Přehled v PDF', directory: 'public/soubory/cerpani', publicPath: '/soubory/cerpani/', ...required }),
+        file: fields.file({ label: 'Soubor v PDF', directory: 'public/soubory/cerpani', publicPath: '/soubory/cerpani/', ...required }),
         publikace,
         emptyContent: fields.emptyContent({ extension: 'mdoc' }),
       },

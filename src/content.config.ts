@@ -25,7 +25,7 @@ const zapisy = defineCollection({
 });
 const cerpani = defineCollection({
   loader: glob({ pattern: '**/*.mdoc', base: './src/content/cerpani-prispevku' }),
-  schema: z.object({ year: z.string().regex(/^\d{4}$/), file: z.string(), publikace }),
+  schema: z.object({ title: z.string(), uploadedAt: z.coerce.date(), file: z.string(), publikace }),
 });
 
 export const collections = { novinky, dokumenty, zapisy, cerpani };
