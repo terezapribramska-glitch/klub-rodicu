@@ -189,7 +189,8 @@ export default config({
         ),
         platby: fields.object(
           {
-            membershipFee: fields.integer({ label: 'Výše členského příspěvku', defaultValue: 500, ...required }),
+            membershipFeePrimary: fields.integer({ label: 'Členský příspěvek za žáka ZŠ / školní rok', defaultValue: 500, ...required }),
+            membershipFeeSecondary: fields.integer({ label: 'Členský příspěvek za žáka SŠ / školní rok', defaultValue: 1000, ...required }),
             currency: fields.select({ label: 'Měna', options: [{ label: 'Kč', value: 'CZK' }], defaultValue: 'CZK' }),
             accountNumber: fields.text({ label: 'Číslo účtu', ...required }),
             iban: fields.text({ label: 'IBAN' }),
