@@ -166,9 +166,6 @@ export default config({
           fields.object({
             className: fields.text({ label: 'Třída', ...required }),
             chairName: fields.text({ label: 'Předseda/předsedkyně' }),
-            chairEmail: fields.text({ label: 'E-mail předsedy/předsedkyně' }),
-            treasurerName: fields.text({ label: 'Pokladník/pokladnice' }),
-            treasurerEmail: fields.text({ label: 'E-mail pokladníka/pokladnice' }),
           }),
           { label: 'Třídní výbory', itemLabel: (props) => props.fields.className.value || 'Nová třída' },
         ),

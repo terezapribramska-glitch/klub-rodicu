@@ -7,12 +7,10 @@ import EnvelopeIcon from '../components/icons/EnvelopeIcon.astro';
 import { keystaticReader } from '../lib/keystatic';
 
 const kontakty = await keystaticReader.singletons.kontakty.read();
-const nastaveni = await keystaticReader.singletons.nastaveniWebu.read();
 const obecne = kontakty?.obecne;
 const vedeni = kontakty?.vedeni ?? [];
 const zastupciSkoly = kontakty?.zastupciSkoly ?? [];
 const tridniVybory = kontakty?.tridniVybory ?? [];
-const ucet = nastaveni?.platby?.accountNumber;
 ---
 
 <Layout>
@@ -22,14 +20,13 @@ const ucet = nastaveni?.platby?.accountNumber;
       <EnvelopeIcon slot="icon" />
     </PageHeader>
     <section class="contacts">
-      {(obecne || ucet) && <section class="overview-card card">
+      {obecne && <section class="overview-card card">
         {obecne && <div class="overview-section"><h3>Kontakt na výbor</h3><p>Pro obecné dotazy a&nbsp;komunikaci s výborem.</p>{obecne.email && <a href={`mailto:${obecne.email}`}>{obecne.email}</a>}</div>}
         {obecne?.address && <div class="overview-section"><h3>Sídlo spolku</h3><p class="address">{obecne.address}</p></div>}
-        {ucet && <div class="overview-section"><h3>Bankovní spojení</h3><p><strong>{ucet}</strong></p><p>Informace k platbám najdete také na stránce <a href="/platby">Platby</a>.</p></div>}
       </section>}
       {vedeni.length > 0 && <section class="people"><h2>Výbor Klubu rodičů</h2><div class="table-scroll"><table class="people-table"><thead><tr><th>Jméno</th><th>Pozice</th><th>E-mail</th></tr></thead><tbody>{vedeni.map((osoba) => <tr><td data-label="Jméno"><h3>{osoba.name}</h3></td><td data-label="Pozice">{osoba.role}</td><td data-label="E-mail">{osoba.email && <a href={`mailto:${osoba.email}`}>{osoba.email}</a>}</td></tr>)}</tbody></table></div></section>}
       {zastupciSkoly.length > 0 && <section class="people"><h2>Zástupci školy</h2><div class="table-scroll"><table class="people-table"><thead><tr><th>Jméno</th><th>Pozice</th><th>E-mail</th></tr></thead><tbody>{zastupciSkoly.map((osoba) => <tr><td data-label="Jméno"><h3>{osoba.name}</h3></td><td data-label="Pozice">{osoba.role}</td><td data-label="E-mail">{osoba.email && <a href={`mailto:${osoba.email}`}>{osoba.email}</a>}</td></tr>)}</tbody></table></div></section>}
-      {tridniVybory.length > 0 && <section class="people"><h2>Třídní výbory</h2><div class="contact-grid">{tridniVybory.map((trida) => <article class="card"><h3>{trida.className}</h3>{trida.chairName && <p>Předseda/předsedkyně: {trida.chairName}</p>}{trida.treasurerName && <p>Pokladník/pokladnice: {trida.treasurerName}</p>}</article>)}</div></section>}
+      {tridniVybory.length > 0 && <section class="people"><h2>Třídní výbory</h2><div class="table-scroll"><table class="people-table"><thead><tr><th>Třída</th><th>Předseda/předsedkyně</th></tr></thead><tbody>{tridniVybory.map((trida) => <tr><td data-label="Třída"><h3>{trida.className}</h3></td><td data-label="Předseda/předsedkyně">{trida.chairName}</td></tr>)}</tbody></table></div></section>}
     </section>
   </main>
   <Footer />
@@ -37,7 +34,6 @@ const ucet = nastaveni?.platby?.accountNumber;
 
 <style>
 .contacts { max-width: 900px; margin: 0 auto; padding-bottom: 5rem; }
-.contact-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-bottom: 2rem; }
 .card { padding: 2rem; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); }
 .card h2, .card h3 { margin-bottom: 1rem; }
 .card p:last-child { margin-bottom: 0; }
@@ -54,7 +50,6 @@ const ucet = nastaveni?.platby?.accountNumber;
 .people-table h3 { margin: 0; }
 .people-table td:nth-child(2) { color: var(--color-text-light); }
 @media (max-width: 800px) {
-  .contact-grid { grid-template-columns: 1fr; }
   .table-scroll { overflow: visible; }
   .people-table, .people-table tbody, .people-table tr, .people-table td { display: block; width: 100%; min-width: 0; }
   .people-table thead { display: none; }
