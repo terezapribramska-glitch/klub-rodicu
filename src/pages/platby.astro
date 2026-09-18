@@ -15,10 +15,10 @@ const cerpani = (await getCollection('cerpani'))
   .sort((a, b) => Number(b.data.year) - Number(a.data.year));
 ---
 
-<Layout>
+<Layout title="Platby a hospodaření | Klub rodičů při ZŠ Kavčí hory">
   <Header />
   <main>
-    <PageHeader eyebrow="Placení a čerpání" title="Platby" lead="Všechny informace o členských příspěvcích, způsobu platby a&nbsp;využití prostředků Klubu rodičů."><CreditCardIcon slot="icon" /></PageHeader>
+    <PageHeader eyebrow="Placení a čerpání" title="Platby a hospodaření" lead="Všechny informace o členských příspěvcích, způsobu platby a&nbsp;využití prostředků Klubu rodičů."><CreditCardIcon slot="icon" /></PageHeader>
     <section class="payments">
       {platby ? <>
         <section class="payment-card"><h2>Členský příspěvek</h2><p class="price">{platby.membershipFee.toLocaleString('cs-CZ')} {platby.currency === 'CZK' ? 'Kč' : platby.currency}</p><p class="price-note">za každého žáka a&nbsp;školní rok</p></section>
