@@ -29,4 +29,12 @@ zastupciSkoly:
     email: l.grimmer@ksidlisti.cz
 tridniVybory:
   - className: Z1.A
-    chairName: Syrová Dagmar
+    chairName: 'Dagmar Syrová '
+  - className: Z1B
+    chairName: Lenka Vavro Zahradnická
+  - className: Z2.A
+    chairName: 'Daniela Šandová '
+  - className: Z2.B
+    chairName: 'Dominika Bouzková '
+  - className: Z 3.A
+    chairName: Lenka Belančíková
