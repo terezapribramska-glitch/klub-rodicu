@@ -28,13 +28,58 @@ zastupciSkoly:
     role: Pedagog SŠ
     email: l.grimmer@ksidlisti.cz
 tridniVybory:
-  - className: Z1.A
+  - className: Z 1.A
     chairName: 'Dagmar Syrová '
-  - className: Z1B
+  - className: Z 1.B
     chairName: Lenka Vavro Zahradnická
-  - className: Z2.A
+  - className: Z 2.A
     chairName: 'Daniela Šandová '
-  - className: Z2.B
+  - className: Z 2.B
     chairName: 'Dominika Bouzková '
   - className: Z 3.A
     chairName: Lenka Belančíková
+  - className: Z 3.B
+    chairName: 'Lenka Belančíková '
+  - className: Z 4.A
+    chairName: 'Erika Frančáková '
+  - className: Z 4.B
+    chairName: 'Petr Popule '
+  - className: Z 5.A
+    chairName: Lucie Kovářová
+  - className: Z 5.B
+    chairName: 'Michaela Vratišovská '
+  - className: Z 6.A
+  - className: Z 6.B
+    chairName: 'Vitalii Tymoshenko '
+  - className: Z 7.A
+    chairName: Pavla Benešová
+  - className: Z 7.B
+    chairName: 'Romana Dědinová '
+  - className: Z 8.A
+    chairName: 'Zdeněk Bukvář '
+  - className: Z 8.B
+    chairName: 'Tereza Řápková '
+  - className: Z 9.A
+    chairName: 'Dana Vráblíková '
+  - className: Z 9.B
+    chairName: 'Tereza Černá '
+  - className: S 1.A
+    chairName: Veronika Pušková
+  - className: S 1.B
+    chairName: 'Dita Tomková '
+  - className: S 2.A
+    chairName: 'Jiří Král '
+  - className: S 2.B
+    chairName: 'Kateřina Pulkertová '
+  - className: S 2.C
+    chairName: 'Jana Králová '
+  - className: S 3.A
+    chairName: 'Michala Zelová '
+  - className: S 3.B
+    chairName: 'Lucie Heppnerová '
+  - className: S 3.C
+    chairName: 'Jana Vokounová '
+  - className: S 4.A
+    chairName: 'Andrea Le Garrec '
+  - className: S 4.B
+    chairName: 'Kateřina Jiravová '
