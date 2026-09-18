@@ -27,4 +27,6 @@ zastupciSkoly:
   - name: Ing. Lukáš Grimmer
     role: Pedagog SŠ
     email: l.grimmer@ksidlisti.cz
-tridniVybory: []
+tridniVybory:
+  - className: Z1.A
+    chairName: Syrová Dagmar
